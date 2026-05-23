@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { db } from '../firebase/config'
-import { doc, onSnapshot, deleteDoc } from 'firebase/firestore'
+import { doc, onSnapshot, deleteDoc, updateDoc } from 'firebase/firestore'
 import { solicitarPermiso, escucharNotificaciones } from '../firebase/notifications'
 
 function EsperaView({ turno, turnoId, onCancelar }) {
@@ -18,12 +18,18 @@ function EsperaView({ turno, turnoId, onCancelar }) {
   }, [turnoId])
 
   useEffect(() => {
-    solicitarPermiso()
+  const registrarToken = async () => {
+    const token = await solicitarPermiso()
+    if (token && turnoId) {
+      await updateDoc(doc(db, 'turnos', turnoId), { fcmToken: token })
+    }
+  }
+  registrarToken()
 
-    escucharNotificaciones((payload) => {
-      console.log('Notificación recibida:', payload)
-    })
-  }, [])
+  escucharNotificaciones((payload) => {
+    console.log('Notificación recibida:', payload)
+  })
+}, [turnoId])
 
   const handleCancelar = async () => {
     try {
@@ -39,7 +45,7 @@ function EsperaView({ turno, turnoId, onCancelar }) {
       <div className="min-h-screen bg-green-50 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow p-8 max-w-sm w-full text-center">
           <h2 className="text-2xl font-bold text-green-600 mb-2">¡Tu orden está lista!</h2>
-          <p className="text-gray-500">Pasa a ventanilla a recoger tu pedido.</p>
+          <p className="text-gray-500">Pasa a ventanilla a pagar y recoger tu pedido.</p>
           <button
             onClick={onCancelar}
             className="mt-6 px-6 py-3 bg-green-600 text-white rounded-xl font-semibold w-full"
