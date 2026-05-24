@@ -223,7 +223,7 @@ function ClienteView() {
       
       <p className="text-center text-blue-500 text-lg font-medium mb-2">{getSaludo()}</p>
       
-      <p className="text-center text-sm text-gray-500 mb-6"> Máximo 5 items en total - Máximo 2 de cada producto </p>
+      <p className="text-center text-sm text-gray-600 mb-6"> Máximo 5 items en total - Máximo 2 de cada producto </p>
 
       {error && (
         <div className="max-w-2xl mx-auto mb-4 bg-red-100 border border-red-300 text-red-700 px-4 py-2 rounded-lg text-sm">
@@ -240,20 +240,25 @@ function ClienteView() {
                 categoria.items.map((item) => {
                 const cantidad = carrito[item.id] || 0
                 return (
-                  <div key={item.id} className={`p-4 rounded-lg border-2 bg-white transition-all ${
-                      cantidad > 0 ? 'border-blue-500' : 'border-gray-200'
-                    }`}>
+                  <div
+                      key={item.id}
+                      role="region"
+                      aria-label={`${item.nombre}, $${item.precio}`}
+                      className={`p-4 rounded-lg border-2 bg-white transition-all ${
+                        cantidad > 0 ? 'border-blue-500' : 'border-gray-200'
+                      }`}
+                    >
                     <div className="flex justify-between items-center">
                       <div>
                         <p className="font-medium text-gray-800">{item.nombre}</p>
-                        <p className="text-sm text-gray-500">{item.descripcion}</p>
+                        <p className="text-sm text-gray-600">{item.descripcion}</p>
                       </div>
                       <span className="text-blue-600 font-bold ml-4">${item.precio}</span>
                     </div>
                     <div className="flex items-center gap-3 mt-3">
                       <button
                         onClick={() => handleQuitar(item)}
-                        className="w-8 h-8 rounded-full border border-gray-300 text-gray-600 font-bold hover:bg-gray-100"
+                        className="w-11 h-11 rounded-full border border-gray-300 text-gray-600 font-bold hover:bg-gray-100"
                         aria-label={`Quitar una unidad de ${item.nombre}`}
                       >
                         −
@@ -263,7 +268,7 @@ function ClienteView() {
                       </span>
                       <button
                         onClick={() => handleAgregar(item)}
-                        className="w-8 h-8 rounded-full border border-blue-500 text-blue-600 font-bold hover:bg-blue-50"
+                        className="w-11 h-11 rounded-full border border-blue-500 text-blue-600 font-bold hover:bg-blue-50"
                         aria-label={`Agregar una unidad de ${item.nombre}`}
                       >
                         +
@@ -280,12 +285,12 @@ function ClienteView() {
       {productosDistintos > 0 && (
         <div className="fixed bottom-0 left-0 right-0 bg-white border-t p-4 flex justify-between items-center">
           <div>
-            <p className="text-sm text-gray-500">{productosDistintos} producto(s) seleccionado(s)</p>
+            <p className="text-sm text-gray-600">{productosDistintos} producto(s) seleccionado(s)</p>
             <p className="text-blue-600 font-bold text-lg">${total}</p>
           </div>
           <button
             onClick={handleConfirmar}
-            className="px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold"
+            className="px-6 py-4 bg-blue-600 text-white rounded-xl font-semibold text-base min-h-[44px]"
           >
             Confirmar orden
           </button>

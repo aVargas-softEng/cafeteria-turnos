@@ -29,7 +29,7 @@ function LoginView({ onLogin }) {
         <h1 className="text-2xl font-bold text-gray-800 text-center mb-2">
           Panel de Administración
         </h1>
-        <p className="text-gray-500 text-sm text-center mb-6">
+        <p className="text-gray-600 text-sm text-center mb-6">
           Cafetería Universitaria
         </p>
 

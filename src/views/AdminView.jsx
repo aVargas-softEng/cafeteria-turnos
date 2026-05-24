@@ -68,13 +68,13 @@ function AdminView() {
             </ul>
             <button
               onClick={() => handleListo(p.id)}
-              className="w-full py-2 bg-green-600 text-white rounded-xl font-semibold"
+              className="w-full py-3 bg-green-600 text-white rounded-xl font-semibold"
             >
              Pedido listo
             </button>
             <button
                 onClick={() => handleCancelar(p.id)}
-                className="w-full py-2 mt-2 bg-red-500 text-white rounded-xl font-semibold"
+                className="w-full py-3 mt-2 bg-red-500 text-white rounded-xl font-semibold"
               >
                 Cancelar pedido
               </button>
@@ -90,7 +90,7 @@ function AdminView() {
               <div key={p.id} className="bg-green-50 border border-green-200 rounded-xl p-4 mb-3 opacity-60">
                 <div className="flex justify-between items-center">
                   <span className="text-green-600 font-bold">Orden #{p.turno}</span>
-                  <span className="text-gray-500 text-sm">${p.total}</span>
+                  <span className="text-gray-600 text-sm">${p.total}</span>
                 </div>
               </div>
             ))}

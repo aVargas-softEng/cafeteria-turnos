@@ -47,8 +47,8 @@ function EsperaView({ turno, turnoId, onCancelar }) {
     return (
       <div className="min-h-screen bg-green-50 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow p-8 max-w-sm w-full text-center">
-          <h2 className="text-2xl font-bold text-green-600 mb-2">¡Tu orden está lista!</h2>
-          <p className="text-gray-500">Pasa a ventanilla a pagar y recoger tu pedido.</p>
+          <h2 className="text-2xl font-bold text-green-600 mb-2" role="alert">¡Tu orden está lista!</h2>
+          <p className="text-gray-600">Pasa a ventanilla a pagar y recoger tu pedido.</p>
           <button
             onClick={onCancelar}
             className="mt-6 px-6 py-3 bg-green-600 text-white rounded-xl font-semibold w-full"
@@ -65,7 +65,7 @@ function EsperaView({ turno, turnoId, onCancelar }) {
       <div className="min-h-screen bg-red-50 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow p-8 max-w-sm w-full text-center">
           <h2 className="text-2xl font-bold text-red-600 mb-2">Tu orden fue cancelada</h2>
-          <p className="text-gray-500">El personal de cafetería canceló tu pedido.</p>
+          <p className="text-gray-600">El personal de cafetería canceló tu pedido.</p>
           <button
             onClick={onCancelar}
             className="mt-6 px-6 py-3 bg-red-500 text-white rounded-xl font-semibold w-full"
@@ -81,11 +81,11 @@ function EsperaView({ turno, turnoId, onCancelar }) {
   return (
     <div className="min-h-screen bg-blue-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow p-8 max-w-sm w-full text-center">
-        <p className="text-gray-500 text-sm mb-1">Tu número de orden</p>
-        <p className="text-7xl font-bold text-blue-600 mb-6">#{turno}</p>
+        <p className="text-gray-600 text-sm mb-1">Tu número de orden</p>
+        <p className="text-7xl font-bold text-blue-600 mb-6" aria-label={`Tu número de orden es ${turno}`}>#{turno}</p>
         <div className="bg-gray-100 rounded-xl p-4 mb-4">
-          <p className="text-gray-500 text-sm">Estado</p>
-          <p className="text-lg font-semibold text-gray-700 mt-1">En preparación</p>
+          <p className="text-gray-600 text-sm">Estado</p>
+          <p className="text-lg font-semibold text-gray-700 mt-1" aria-live="polite">En preparación</p>
         </div>
         <p className="text-sm text-gray-400">Te avisaremos cuando tu orden esté lista</p>
       </div>
