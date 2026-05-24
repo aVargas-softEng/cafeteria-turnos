@@ -41,9 +41,9 @@ function AdminView() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-      <div className="relative flex items-center justify-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Panel de Administración</h1>
-        <button onClick={() => signOut(auth)} className="absolute right-0 px-3 py-1 bg-red-500 text-white text-sm rounded-lg font-medium">Cerrar sesión</button>
+      <div className="flex flex-col items-center mb-6 gap-2">
+        <h1 className="text-2xl font-bold text-gray-800 text-center">Panel de Administración</h1>
+        <button onClick={() => signOut(auth)} className="px-4 py-1 bg-red-500 text-white text-sm rounded-lg font-medium">Cerrar sesión</button>
       </div>
 
       <div className="max-w-2xl mx-auto">
