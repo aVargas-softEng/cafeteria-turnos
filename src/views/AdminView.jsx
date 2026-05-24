@@ -1,9 +1,21 @@
 import { useEffect, useState } from 'react'
-import { db } from '../firebase/config'
+import { db, auth } from '../firebase/config'
 import { collection, onSnapshot, updateDoc, doc, query, orderBy } from 'firebase/firestore'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
+import LoginView from './LoginView'
 
 function AdminView() {
   const [pedidos, setPedidos] = useState([])
+  const [usuario, setUsuario] = useState(null)
+  const [verificando, setVerificando] = useState(true)
+
+    useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => {
+      setUsuario(user)
+      setVerificando(false)
+    })
+    return () => unsub()
+  }, [])
 
   useEffect(() => {
     const q = query(collection(db, 'turnos'), orderBy('creadoEn', 'asc'))
@@ -24,9 +36,15 @@ function AdminView() {
   const enPreparacion = pedidos.filter(p => p.estado === 'en_preparacion')
   const listos = pedidos.filter(p => p.estado === 'listo')
 
+  if (verificando) return null
+  if (!usuario) return <LoginView onLogin={() => {}} />
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">Panel de Administración</h1>
+      <div className="relative flex items-center justify-center mb-6">
+        <h1 className="text-2xl font-bold text-gray-800">Panel de Administración</h1>
+        <button onClick={() => signOut(auth)} className="absolute right-0 px-3 py-1 bg-red-500 text-white text-sm rounded-lg font-medium">Cerrar sesión</button>
+      </div>
 
       <div className="max-w-2xl mx-auto">
         <h2 className="text-lg font-semibold text-gray-600 mb-3">

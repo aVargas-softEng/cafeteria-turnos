@@ -83,7 +83,7 @@ function ClienteView() {
   try {
     const contadorRef = doc(db, 'config', 'contador')
     const turnosRef = collection(db, 'turnos')
-    const nuevoTurnoRef = doc(turnosRef)  // genera el ID automático
+    const nuevoTurnoRef = doc(turnosRef)  
 
 
     let numeroTurno
