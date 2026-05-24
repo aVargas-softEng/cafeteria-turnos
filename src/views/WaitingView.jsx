@@ -2,20 +2,30 @@ import { useEffect, useState } from 'react'
 import { db } from '../firebase/config'
 import { doc, onSnapshot, updateDoc } from 'firebase/firestore'
 import { solicitarPermiso, escucharNotificaciones } from '../firebase/notifications'
+import confetti from 'canvas-confetti'
 
 function EsperaView({ turno, turnoId, onCancelar }) {
   const [estado, setEstado] = useState('en_preparacion')
 
   useEffect(() => {
-    if (!turnoId) return
-    const ref = doc(db, 'turnos', turnoId)
-    const unsub = onSnapshot(ref, (snap) => {
-      if (snap.exists()) {
-        setEstado(snap.data().estado)
+  if (!turnoId) return
+  const ref = doc(db, 'turnos', turnoId)
+  const unsub = onSnapshot(ref, (snap) => {
+    if (snap.exists()) {
+      const nuevoEstado = snap.data().estado
+      setEstado(nuevoEstado)
+      if (nuevoEstado === 'listo') {
+        confetti({
+          particleCount: 150,
+          spread: 80,
+          origin: { y: 0.6 },
+          colors: ['#2563eb', '#16a34a', '#facc15']
+        })
       }
-    })
-    return () => unsub()
-  }, [turnoId])
+    }
+  })
+  return () => unsub()
+}, [turnoId])
 
   useEffect(() => {
   const registrarToken = async () => {

@@ -6,33 +6,105 @@ import EsperaView from './WaitingView'
 
 const menu = [
   {
-    categoria: 'Orden del día',
+    categoria: 'Bebidas',
     items: [
-      { id: 1, nombre: 'Orden del día completa', descripcion: 'Guisado + arroz + frijoles + tortillas', precio: 45 },
-      { id: 2, nombre: 'Media orden', descripcion: 'Guisado + tortillas', precio: 25 },
+      { id: 1, nombre: 'Jugo verde', descripcion: '250ml', precio: 25 },
+      { id: 2, nombre: 'Jugo natural de naranja', descripcion: '250ml', precio: 25 },
+      { id: 3, nombre: 'Agua de sabor', descripcion: '250ml', precio: 15 },
+      { id: 4, nombre: 'Chocomilk', descripcion: '250ml', precio: 20 },
+      { id: 5, nombre: 'Vaso con leche', descripcion: '250ml', precio: 15 },
+      { id: 6, nombre: 'Café', descripcion: '250ml', precio: 20 },
+      { id: 7, nombre: 'Té', descripcion: '250ml', precio: 15 },
+      { id: 8, nombre: 'Licuado de frutas', descripcion: '250ml', precio: 30 },
+    ]
+  },
+  {
+    categoria: 'Desayunos',
+    items: [
+      { id: 9, nombre: 'Orden de huevos', descripcion: 'Huevos al gusto con frijoles y tortillas', precio: 50 },
+      { id: 10, nombre: 'Enchiladas suizas', descripcion: '3 enchiladas con crema y queso', precio: 55 },
+      { id: 11, nombre: 'Chilaquiles', descripcion: 'Con crema, queso y pollo', precio: 50 },
+      { id: 12, nombre: 'Desayuno completo', descripcion: 'Huevo, frijoles y café', precio: 60 },
     ]
   },
   {
     categoria: 'Tortas',
     items: [
-      { id: 3, nombre: 'Torta de jamón', descripcion: 'Torta de jamón con queso y lechuga', precio: 30 },
-      { id: 4, nombre: 'Torta de panela', descripcion: 'Panela fresca y lechuga', precio: 35 },
-      { id: 5, nombre: 'Torta de pierna', descripcion: 'Pierna de cerdo, lechuga y salsa', precio: 35 },
+      { id: 13, nombre: 'Torta de lomo', descripcion: 'Lomo, frijoles y chile', precio: 40 },
+      { id: 14, nombre: 'Torta hawaiiana', descripcion: 'Jamón, piña y queso', precio: 45 },
+      { id: 15, nombre: 'Torta cubana', descripcion: 'Surtida con jamón, milanesa y queso', precio: 45 },
+      { id: 16, nombre: 'Torta de panela', descripcion: 'Panela fresca y lechuga', precio: 35 },
+      { id: 17, nombre: 'Torta de jamón', descripcion: 'Jamón, queso y lechuga', precio: 35 },
+    ]
+  },
+  {
+    categoria: 'Antojitos mexicanos',
+    items: [
+      { id: 18, nombre: 'Enfrijoladas', descripcion: '3 enfrijoladas con queso y crema', precio: 40 },
+      { id: 19, nombre: 'Flautas de pollo', descripcion: '3 flautas con crema y guacamole', precio: 45 },
+      { id: 20, nombre: 'Sopitos', descripcion: '3 sopitos con frijoles y queso', precio: 40 },
+      { id: 21, nombre: 'Sincronizada', descripcion: 'Jamón y queso en tortilla de harina', precio: 45 },
+      { id: 22, nombre: 'Molletes con mantequilla', descripcion: 'Con frijoles y queso gratinado', precio: 30 },
+    ]
+  },
+  {
+    categoria: 'Complementos',
+    items: [
+      { id: 23, nombre: 'Gelatina', descripcion: 'Sabor del día', precio: 15 },
+      { id: 24, nombre: 'Fruta', descripcion: 'Fruta de temporada', precio: 20 },
+    ]
+  },
+  {
+    categoria: 'Crepería',
+    items: [
+      { id: 25, nombre: 'Crepas', descripcion: '3 crepas con relleno dulce o salado', precio: 50 },
+      { id: 26, nombre: 'Orden de hotcakes', descripcion: '3 hotcakes con miel y mantequilla', precio: 45 },
+    ]
+  },
+  {
+    categoria: 'Sandwich',
+    items: [
+      { id: 27, nombre: 'Sandwich de lomo', descripcion: 'Lomo, lechuga y tomate', precio: 40 },
+      { id: 28, nombre: 'Sandwich de pollo', descripcion: 'Pollo, lechuga y mayonesa', precio: 40 },
+      { id: 29, nombre: 'Sandwich de panela', descripcion: 'Panela fresca y lechuga', precio: 35 },
+      { id: 30, nombre: 'Sandwich de jamón', descripcion: 'Jamón, queso y mostaza', precio: 35 },
+    ]
+  },
+  {
+    categoria: 'Pachucos',
+    items: [
+      { id: 31, nombre: 'Medio pachuco con carne', descripcion: 'Tortilla con frijoles, carne y queso', precio: 50 },
+      { id: 32, nombre: 'Medio pachuco sencillo', descripcion: 'Tortilla con frijoles y queso', precio: 40 },
+    ]
+  },
+  {
+    categoria: 'Comida Rápida',
+    items: [
+      { id: 33, nombre: 'Hamburguesa sin papas', descripcion: 'Carne, lechuga, tomate y queso', precio: 50 },
+      { id: 34, nombre: 'Hamburguesa con papas', descripcion: 'Carne, lechuga, tomate, queso y papas fritas', precio: 60 },
+      { id: 35, nombre: 'Hot dog', descripcion: 'Salchicha con mostaza y catsup', precio: 40 },
+      { id: 36, nombre: 'Papas a la francesa', descripcion: 'Porción individual con catsup', precio: 35 },
+      { id: 37, nombre: 'Burritos', descripcion: '3 burritos con frijoles y queso', precio: 45 },
+    ]
+  },
+  {
+    categoria: 'Guisos',
+    items: [
+      { id: 38, nombre: 'Guiso del día con agua', descripcion: 'Guiso del día con arroz, frijoles y agua', precio: 55 },
+      { id: 39, nombre: 'Guiso del día sin agua', descripcion: 'Guiso del día con arroz y frijoles', precio: 45 },
     ]
   },
   {
     categoria: 'Tacos',
     items: [
-      { id: 6, nombre: 'Tacos dorados', descripcion: '3 tacos de papa dorados, sin carne', precio: 20},
-      { id: 7, nombre: 'Tacos tuxpeños', descripcion: '3 tacos de frijoles, carne o papa', precio: 25 },
+      { id: 40, nombre: 'Taquitos de adobada', descripcion: '3 tacos con cebolla y cilantro', precio: 35 },
+      { id: 41, nombre: 'Tacos tuxpeños', descripcion: '3 tacos de frijoles, carne o papa', precio: 35 },
     ]
   },
   {
-    categoria: 'Bebidas',
+    categoria: 'Ensalada',
     items: [
-      { id: 8, nombre: 'Agua fresca', descripcion: 'Sabor del día', precio: 15 },
-      { id: 9, nombre: 'Café', descripcion: 'Café negro', precio: 35 },
-      { id: 10, nombre: 'Jugo natural', descripcion: 'Naranja o zanahoria', precio: 20 },
+      { id: 42, nombre: 'Ensalada de pollo', descripcion: 'Pollo, lechuga, tomate y aderezo', precio: 50 },
     ]
   },
 ]
@@ -135,18 +207,23 @@ function ClienteView() {
     setError('')
   }
 
-  if (confirmado) {
-  return <EsperaView turno={numeroTurno} turnoId={turnoId} onCancelar={handleCancelar} />
+  const getSaludo = () => {
+    const hora = new Date().getHours()
+    if (hora >= 6 && hora < 12) return '¡Buenos días! ¿Qué vas a desayunar hoy?'
+    if (hora >= 12 && hora < 15) return '¡Buenas tardes! ¿Qué se te antoja?'
+    return '¡Hola! ¿En qué podemos ayudarte?'
   }
+
+  if (confirmado) {return <EsperaView turno={numeroTurno} turnoId={turnoId} onCancelar={handleCancelar} />}
 
   return (
     <div className="min-h-screen bg-gray-100 p-4 pb-40">
-      <h1 className="text-2xl font-bold text-center text-blue-700 mb-2">
-        Cafetería — Selecciona tu pedido
-      </h1>
-      <p className="text-center text-sm text-gray-500 mb-6">
-        Máximo 5 items en total · Máximo 2 de cada producto
-      </p>
+
+      <h1 className="text-2xl font-bold text-center text-blue-700 mb-1">Cafetería Universitaria</h1>
+      
+      <p className="text-center text-blue-500 text-lg font-medium mb-2">{getSaludo()}</p>
+      
+      <p className="text-center text-sm text-gray-500 mb-6"> Máximo 5 items en total - Máximo 2 de cada producto </p>
 
       {error && (
         <div className="max-w-2xl mx-auto mb-4 bg-red-100 border border-red-300 text-red-700 px-4 py-2 rounded-lg text-sm">
@@ -157,19 +234,15 @@ function ClienteView() {
       <div className="max-w-2xl mx-auto">
         {menu.map((categoria) => (
           <div key={categoria.categoria} className="mb-6">
-            <h2 className="text-lg font-semibold text-gray-600 mb-2 border-b pb-1">
-              {categoria.categoria}
-            </h2>
+            <h2 className="text-lg font-semibold text-gray-600 mb-2 border-b pb-1">{categoria.categoria}</h2>
             <div className="grid grid-cols-1 gap-3">
-              {categoria.items.map((item) => {
+              {
+                categoria.items.map((item) => {
                 const cantidad = carrito[item.id] || 0
                 return (
-                  <div
-                    key={item.id}
-                    className={`p-4 rounded-lg border-2 bg-white transition-all ${
+                  <div key={item.id} className={`p-4 rounded-lg border-2 bg-white transition-all ${
                       cantidad > 0 ? 'border-blue-500' : 'border-gray-200'
-                    }`}
-                  >
+                    }`}>
                     <div className="flex justify-between items-center">
                       <div>
                         <p className="font-medium text-gray-800">{item.nombre}</p>
