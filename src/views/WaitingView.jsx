@@ -45,13 +45,13 @@ function EsperaView({ turno, turnoId, onCancelar }) {
 
   if (estado === 'listo') {
     return (
-      <div className="min-h-screen bg-green-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-2xl shadow p-8 max-w-sm w-full text-center">
+      <div className="min-h-screen bg-green-100 dark:bg-green-50 flex items-center justify-center p-4">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow p-8 max-w-sm w-full text-center">
           <h2 className="text-2xl font-bold text-green-600 mb-2" role="alert">¡Tu orden está lista!</h2>
-          <p className="text-gray-600">Pasa a ventanilla a pagar y recoger tu pedido.</p>
+          <p className="text-gray-600 dark:text-gray-400">Pasa a ventanilla a pagar y recoger tu pedido.</p>
           <button
             onClick={onCancelar}
-            className="mt-6 px-6 py-3 bg-green-600 text-white rounded-xl font-semibold w-full"
+            className="mt-6 px-6 py-3 bg-green-600 dark:bg-green-900 text-white rounded-xl font-semibold w-full"
           >
             Hacer otro pedido
           </button>
@@ -62,13 +62,13 @@ function EsperaView({ turno, turnoId, onCancelar }) {
 
     if (estado === 'cancelado') {
     return (
-      <div className="min-h-screen bg-red-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-2xl shadow p-8 max-w-sm w-full text-center">
+      <div className="min-h-screen bg-red-100 dark:bg-red-50 flex items-center justify-center p-4">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow p-8 max-w-sm w-full text-center">
           <h2 className="text-2xl font-bold text-red-600 mb-2" role="alert">Tu orden fue cancelada</h2>
-          <p className="text-gray-600">El personal de cafetería canceló tu pedido.</p>
+          <p className="text-gray-600 dark:text-gray-300">El personal de cafetería canceló tu pedido.</p>
           <button
             onClick={onCancelar}
-            className="mt-6 px-6 py-3 bg-red-500 text-white rounded-xl font-semibold w-full"
+            className="mt-6 px-6 py-3 bg-red-500 dark:bg-red-900 text-white rounded-xl font-semibold w-full"
           >
             Volver al menú
           </button>
@@ -79,15 +79,15 @@ function EsperaView({ turno, turnoId, onCancelar }) {
 
 
   return (
-    <div className="min-h-screen bg-blue-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-blue-50 dark:bg-gray-900 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow p-8 max-w-sm w-full text-center">
-        <p className="text-gray-600 text-sm mb-1">Tu número de orden</p>
-        <p className="text-7xl font-bold text-blue-600 mb-6" aria-label={`Tu número de orden es ${turno}`}>#{turno}</p>
-        <div className="bg-gray-100 rounded-xl p-4 mb-4">
-          <p className="text-gray-600 text-sm">Estado</p>
-          <p className="text-lg font-semibold text-gray-700 mt-1" aria-live="polite">En preparación</p>
+        <p className="text-gray-600 dark:text-gray-500 text-sm mb-1">Tu número de orden</p>
+        <p className="text-7xl font-bold text-blue-600 dark:text-blue-400 mb-6" aria-label={`Tu número de orden es ${turno}`}>#{turno}</p>
+        <div className="bg-gray-200 dark:bg-gray-500 rounded-xl p-4 mb-4">
+          <p className="text-gray-600 dark:text-gray-200 text-sm">Estado</p>
+          <p className="text-lg font-semibold text-gray-700 dark:text-gray-200 mt-1" aria-live="polite">En preparación</p>
         </div>
-        <p className="text-sm text-gray-400">Te avisaremos cuando tu orden esté lista</p>
+        <p className="text-sm text-gray-400 dark:text-gray-500">Te avisaremos cuando tu orden esté lista</p>
       </div>
     </div>
   )
