@@ -65,7 +65,7 @@ function ClienteView() {
             setError('Máximo 5 productos distintos por orden')
             return
         }
-        if (totalItems >= 5) {   // ← nueva regla
+        if (totalItems >= 5) {   
             setError('Máximo 5 items en total por orden')
             return
         }

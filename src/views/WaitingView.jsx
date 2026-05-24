@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { db } from '../firebase/config'
-import { doc, onSnapshot, deleteDoc, updateDoc } from 'firebase/firestore'
+import { doc, onSnapshot, updateDoc } from 'firebase/firestore'
 import { solicitarPermiso, escucharNotificaciones } from '../firebase/notifications'
 
 function EsperaView({ turno, turnoId, onCancelar }) {
@@ -20,6 +20,7 @@ function EsperaView({ turno, turnoId, onCancelar }) {
   useEffect(() => {
   const registrarToken = async () => {
     const token = await solicitarPermiso()
+    console.log('Token obtenido:', token)
     if (token && turnoId) {
       await updateDoc(doc(db, 'turnos', turnoId), { fcmToken: token })
     }
@@ -31,14 +32,6 @@ function EsperaView({ turno, turnoId, onCancelar }) {
   })
 }, [turnoId])
 
-  const handleCancelar = async () => {
-    try {
-      await deleteDoc(doc(db, 'turnos', turnoId))
-    } catch (e) {
-      console.error(e)
-    }
-    onCancelar()
-  }
 
   if (estado === 'listo') {
     return (
@@ -85,12 +78,6 @@ function EsperaView({ turno, turnoId, onCancelar }) {
           <p className="text-lg font-semibold text-gray-700 mt-1">En preparación</p>
         </div>
         <p className="text-sm text-gray-400">Te avisaremos cuando tu orden esté lista</p>
-        <button
-          onClick={handleCancelar}
-          className="mt-6 text-sm text-red-500 underline"
-        >
-          Cancelar pedido
-        </button>
       </div>
     </div>
   )
