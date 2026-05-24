@@ -64,7 +64,7 @@ function EsperaView({ turno, turnoId, onCancelar }) {
     return (
       <div className="min-h-screen bg-red-50 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow p-8 max-w-sm w-full text-center">
-          <h2 className="text-2xl font-bold text-red-600 mb-2">Tu orden fue cancelada</h2>
+          <h2 className="text-2xl font-bold text-red-600 mb-2" role="alert">Tu orden fue cancelada</h2>
           <p className="text-gray-600">El personal de cafetería canceló tu pedido.</p>
           <button
             onClick={onCancelar}

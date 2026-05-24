@@ -217,13 +217,13 @@ function ClienteView() {
   if (confirmado) {return <EsperaView turno={numeroTurno} turnoId={turnoId} onCancelar={handleCancelar} />}
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4 pb-40">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-4 pb-40">
 
-      <h1 className="text-2xl font-bold text-center text-blue-700 mb-1">Cafetería Universitaria</h1>
+      <h1 className="text-2xl font-bold text-center text-blue-700 dark:text-blue-300 mb-1">Cafetería Universitaria</h1>
       
-      <p className="text-center text-blue-500 text-lg font-medium mb-2">{getSaludo()}</p>
+      <p className="text-center text-blue-500 dark:text-blue-300 text-base font-medium mb-2">{getSaludo()}</p>
       
-      <p className="text-center text-sm text-gray-600 mb-6"> Máximo 5 items en total - Máximo 2 de cada producto </p>
+      <p className="text-center text-sm text-gray-600 dark:text-gray-400 mb-6"> Máximo 5 items en total - Máximo 2 de cada producto </p>
 
       {error && (
         <div className="max-w-2xl mx-auto mb-4 bg-red-100 border border-red-300 text-red-700 px-4 py-2 rounded-lg text-sm">
@@ -234,7 +234,7 @@ function ClienteView() {
       <div className="max-w-2xl mx-auto">
         {menu.map((categoria) => (
           <div key={categoria.categoria} className="mb-6">
-            <h2 className="text-lg font-semibold text-gray-600 mb-2 border-b pb-1">{categoria.categoria}</h2>
+            <h2 className="text-lg font-semibold text-gray-600 dark:text-gray-300 mb-2 border-b border-gray-200 dark:border-gray-700 pb-1">{categoria.categoria}</h2>
             <div className="grid grid-cols-1 gap-3">
               {
                 categoria.items.map((item) => {
@@ -244,31 +244,31 @@ function ClienteView() {
                       key={item.id}
                       role="region"
                       aria-label={`${item.nombre}, $${item.precio}`}
-                      className={`p-4 rounded-lg border-2 bg-white transition-all ${
-                        cantidad > 0 ? 'border-blue-500' : 'border-gray-200'
+                      className={`p-4 rounded-lg border-2 bg-white dark:bg-gray-800 transition-all ${
+                        cantidad > 0 ? 'border-blue-500' : 'border-gray-200 dark:border-gray-600'
                       }`}
                     >
                     <div className="flex justify-between items-center">
                       <div>
-                        <p className="font-medium text-gray-800">{item.nombre}</p>
-                        <p className="text-sm text-gray-600">{item.descripcion}</p>
+                        <p className="font-medium text-gray-800 dark:text-gray-100">{item.nombre}</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">{item.descripcion}</p>
                       </div>
-                      <span className="text-blue-600 font-bold ml-4">${item.precio}</span>
+                      <span className="text-blue-600 dark:text-blue-300 font-bold ml-4">${item.precio}</span>
                     </div>
                     <div className="flex items-center gap-3 mt-3">
                       <button
                         onClick={() => handleQuitar(item)}
-                        className="w-11 h-11 rounded-full border border-gray-300 text-gray-600 font-bold hover:bg-gray-100"
+                        className="w-11 h-11 rounded-full border border-gray-300 text-gray-600 font-bold hover:bg-gray-100 dark:hover:bg-gray-50"
                         aria-label={`Quitar una unidad de ${item.nombre}`}
                       >
                         −
                       </button>
-                      <span className="w-4 text-center font-medium text-gray-800">
+                      <span className="w-4 text-center font-medium text-gray-800 dark:text-gray-100">
                         {cantidad}
                       </span>
                       <button
                         onClick={() => handleAgregar(item)}
-                        className="w-11 h-11 rounded-full border border-blue-500 text-blue-600 font-bold hover:bg-blue-50"
+                        className="w-11 h-11 rounded-full border border-blue-500 dark:border-blue-400 text-blue-600 dark:text-blue-300 font-bold hover:bg-blue-50 dark:hover:bg-gray-500"
                         aria-label={`Agregar una unidad de ${item.nombre}`}
                       >
                         +
@@ -283,14 +283,14 @@ function ClienteView() {
       </div>
 
       {productosDistintos > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white border-t p-4 flex justify-between items-center">
+        <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 p-4 flex justify-between items-center">
           <div>
-            <p className="text-sm text-gray-600">{productosDistintos} producto(s) seleccionado(s)</p>
-            <p className="text-blue-600 font-bold text-lg">${total}</p>
+            <p className="text-sm text-gray-600  dark:text-gray-100">{productosDistintos} producto(s) seleccionado(s)</p>
+            <p className="text-blue-600 dark:text-blue-300 font-bold text-lg">${total}</p>
           </div>
           <button
             onClick={handleConfirmar}
-            className="px-6 py-4 bg-blue-600 text-white rounded-xl font-semibold text-base min-h-[44px]"
+            className="px-6 py-4 bg-blue-600 dark:bg-blue-500 text-white rounded-xl font-semibold text-base min-h-[44px]"
           >
             Confirmar orden
           </button>
