@@ -61,6 +61,7 @@ node index.js
 - **Vista cliente:** https://cafeteria-turnos.vercel.app
 - **Panel de administración:** https://cafeteria-turnos.vercel.app/admin
   - Credenciales de acceso: `admin@a.com`
+  - Contraseña del administrador: `adminCafe` 
 - **Servidor de notificaciones:** https://cafeteria-turnos-server.onrender.com
 
 ## Funcionalidades implementadas
