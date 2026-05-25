@@ -110,7 +110,7 @@ function AdminView() {
               <div key={p.id} className="bg-green-50 dark:bg-green-900 border border-green-200 dark:border-green-700 rounded-xl p-4 mb-3 opacity-60">
                 <div className="flex justify-between items-center">
                   <span className="text-green-600 dark:text-green-400 font-bold">Orden #{p.turno}</span>
-                  <span className="text-gray-600 text-sm dark:text-white">${p.total}</span>
+                  <span className="text-gray-600 dark:text-gray-100 text-sm">${p.total}</span>
                 </div>
               </div>
             ))}
