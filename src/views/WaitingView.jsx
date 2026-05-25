@@ -1,3 +1,5 @@
+//Pantalla de espera del cliente. Aplica cambios de estado en tiempo real y reacciona con confeti (en caso de que el pedido este listo) o se produce un mensaje de cancelación.
+
 import { useEffect, useState } from 'react'
 import { db } from '../firebase/config'
 import { doc, onSnapshot, updateDoc } from 'firebase/firestore'
@@ -7,77 +9,57 @@ import confetti from 'canvas-confetti'
 function EsperaView({ turno, turnoId, onCancelar }) {
   const [estado, setEstado] = useState('en_preparacion')
 
+  //Recibe los cambios de estado de Firestore
   useEffect(() => {
-  if (!turnoId) return
-  const ref = doc(db, 'turnos', turnoId)
-  const unsub = onSnapshot(ref, (snap) => {
-    if (snap.exists()) {
+    if (!turnoId) return
+    const unsub = onSnapshot(doc(db, 'turnos', turnoId), (snap) => {
+      if (!snap.exists()) return
       const nuevoEstado = snap.data().estado
       setEstado(nuevoEstado)
       if (nuevoEstado === 'listo') {
-        confetti({
-          particleCount: 150,
-          spread: 80,
-          origin: { y: 0.6 },
-          colors: ['#2563eb', '#16a34a', '#facc15']
-        })
+        confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, colors: ['#2563eb', '#16a34a', '#facc15'] })
       }
-    }
-  })
-  return () => unsub()
-}, [turnoId])
+    })
+    return () => unsub()
+  }, [turnoId])
 
+  //Registra el token FCM y revisa las notificaciones push
   useEffect(() => {
-  const registrarToken = async () => {
-    const token = await solicitarPermiso()
-    console.log('Token obtenido:', token)
-    if (token && turnoId) {
-      await updateDoc(doc(db, 'turnos', turnoId), { fcmToken: token })
+    const registrarToken = async () => {
+      const token = await solicitarPermiso()
+      console.log('Token obtenido:', token)
+      if (token && turnoId) await updateDoc(doc(db, 'turnos', turnoId), { fcmToken: token })
     }
-  }
-  registrarToken()
+    registrarToken()
+    escucharNotificaciones((payload) => console.log('Notificación recibida:', payload))
+  }, [turnoId])
 
-  escucharNotificaciones((payload) => {
-    console.log('Notificación recibida:', payload)
-  })
-}, [turnoId])
-
-
-  if (estado === 'listo') {
-    return (
-      <div className="min-h-screen bg-green-100 dark:bg-green-50 flex items-center justify-center p-4">
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow p-8 max-w-sm w-full text-center">
-          <h2 className="text-2xl font-bold text-green-600 mb-2" role="alert">¡Tu orden está lista!</h2>
-          <p className="text-gray-600 dark:text-gray-400">Pasa a ventanilla a pagar y recoger tu pedido.</p>
-          <button
-            onClick={onCancelar}
-            className="mt-6 px-6 py-3 bg-green-600 dark:bg-green-900 text-white rounded-xl font-semibold w-full"
-          >
-            Hacer otro pedido
-          </button>
-        </div>
+  //Estados finales
+  if (estado === 'listo') return (
+    <div className="min-h-screen bg-green-100 dark:bg-green-50 flex items-center justify-center p-4">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow p-8 max-w-sm w-full text-center">
+        <h2 className="text-2xl font-bold text-green-600 mb-2" role="alert">¡Tu orden está lista!</h2>
+        <p className="text-gray-600 dark:text-gray-400">Pasa a ventanilla a pagar y recoger tu pedido.</p>
+        <button onClick={onCancelar} className="mt-6 px-6 py-3 bg-green-600 dark:bg-green-900 text-white rounded-xl font-semibold w-full">
+          Hacer otro pedido
+        </button>
       </div>
-    )
-  }
+    </div>
+  )
 
-    if (estado === 'cancelado') {
-    return (
-      <div className="min-h-screen bg-red-100 dark:bg-red-50 flex items-center justify-center p-4">
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow p-8 max-w-sm w-full text-center">
-          <h2 className="text-2xl font-bold text-red-600 mb-2" role="alert">Tu orden fue cancelada</h2>
-          <p className="text-gray-600 dark:text-gray-300">El personal de cafetería canceló tu pedido.</p>
-          <button
-            onClick={onCancelar}
-            className="mt-6 px-6 py-3 bg-red-500 dark:bg-red-900 text-white rounded-xl font-semibold w-full"
-          >
-            Volver al menú
-          </button>
-        </div>
+  if (estado === 'cancelado') return (
+    <div className="min-h-screen bg-red-100 dark:bg-red-50 flex items-center justify-center p-4">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow p-8 max-w-sm w-full text-center">
+        <h2 className="text-2xl font-bold text-red-600 mb-2" role="alert">Tu orden fue cancelada</h2>
+        <p className="text-gray-600 dark:text-gray-300">El personal de cafetería canceló tu pedido.</p>
+        <button onClick={onCancelar} className="mt-6 px-6 py-3 bg-red-500 dark:bg-red-900 text-white rounded-xl font-semibold w-full">
+          Volver al menú
+        </button>
       </div>
-    )
-  }
+    </div>
+  )
 
-
+  //Estado en preparación (el estado default)
   return (
     <div className="min-h-screen bg-blue-50 dark:bg-gray-900 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow p-8 max-w-sm w-full text-center">

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+//Contenido estático de preguntas frecuentes
 const faqs = [
   {
     pregunta: '¿Cómo hago mi pedido?',
@@ -24,20 +25,25 @@ const faqs = [
 ]
 
 function FAQButton() {
-  const [abierto, setAbierto] = useState(false)
-  const [itemAbierto, setItemAbierto] = useState(null)
+  const [abierto, setAbierto] = useState(false) // Controla visibilidad del modal
+  const [itemAbierto, setItemAbierto] = useState(null) // Índice del ítem expandido
+
+  // Alterna la expansión de un ítem. Cierra si ya estaba abierto
+  const toggleItem = (i) => setItemAbierto(itemAbierto === i ? null : i)
 
   return (
     <>
+      {/*Modal de preguntas frecuentes*/}
       {abierto && (
         <div
           className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 flex items-center justify-center"
-          onClick={() => setAbierto(false)}
+          onClick={() => setAbierto(false)} //Cierra al hacer clic fuera
         >
           <div
             className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-5 w-11/12 max-w-md max-h-[80vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
+            onClick={e => e.stopPropagation()} //Evita cerrar al hacer clic dentro
           >
+            {/*Encabezado del modal*/}
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-bold text-gray-800 dark:text-gray-100">
                 Preguntas frecuentes
@@ -51,15 +57,18 @@ function FAQButton() {
               </button>
             </div>
 
+            {/*Lista de preguntas / acordeón */}
             {faqs.map((faq, i) => (
               <div key={i} className="mb-2 border-b border-gray-100 dark:border-gray-700 pb-2">
                 <button
-                  onClick={() => setItemAbierto(itemAbierto === i ? null : i)}
+                  onClick={() => toggleItem(i)}
                   className="w-full text-left text-sm font-medium text-gray-700 dark:text-gray-200 py-1"
                   aria-expanded={itemAbierto === i}
                 >
                   {itemAbierto === i ? '▲' : '▼'} {faq.pregunta}
                 </button>
+
+                {/*Respuesta: visible solo si el ítem está expandido*/}
                 {itemAbierto === i && (
                   <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 pl-4">
                     {faq.respuesta}
@@ -71,6 +80,7 @@ function FAQButton() {
         </div>
       )}
 
+      {/*Botón flotante para abrir el FAQ*/}
       <button
         onClick={() => setAbierto(!abierto)}
         className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 shadow"
