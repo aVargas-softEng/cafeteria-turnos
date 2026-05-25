@@ -1,6 +1,6 @@
 # Turnos de Cafetería
 
-Este es un sistema digital de pedidos y turnos para una cafetería universitaria. Con esto se busca reemplazar el sistema de filas y pedidos en voz alta por un acceso digital en el cual el cliente selecciona su pedido desde su dispositivo, recibe un número de orden y es notificado en tiempo real cuando su pedido está listo.
+Sistema digital de pedidos y turnos para cafetería universitaria. Reemplaza el sistema de filas y pedidos en voz alta por un acceso digital: el cliente selecciona su pedido desde su dispositivo, recibe un número de orden y es notificado en tiempo real cuando su pedido está listo.
 
 ## Materia y equipo
 
@@ -17,6 +17,7 @@ Este es un sistema digital de pedidos y turnos para una cafetería universitaria
 ## Tecnologías utilizadas
 
 | Tecnología | Versión | Uso |
+|---|---|---|
 | React | 18 | Interfaz de usuario |
 | Vite | 5 | Bundler y servidor de desarrollo |
 | Tailwind CSS | 4 | Estilos y diseño responsivo |
@@ -27,6 +28,7 @@ Este es un sistema digital de pedidos y turnos para una cafetería universitaria
 | Vite Plugin PWA | — | Configuración de PWA |
 | Node.js + Express | 22 / 4 | Servidor de notificaciones |
 | Firebase Admin SDK | 12 | Envío de notificaciones desde servidor |
+| canvas-confetti | — | Animación de celebración (ludificación) |
 
 ## Instalación y ejecución local
 
@@ -48,7 +50,6 @@ Para ejecutar el servidor de notificaciones localmente:
 cd server
 npm install
 
-# Crear variable de entorno con las credenciales de Firebase Admin
 # Crear archivo .env con:
 # FIREBASE_SERVICE_ACCOUNT={"type":"service_account",...}
 
@@ -60,29 +61,43 @@ node index.js
 - **Vista cliente:** https://cafeteria-turnos.vercel.app
 - **Panel de administración:** https://cafeteria-turnos.vercel.app/admin
   - Credenciales de acceso: `admin@a.com`
+- **Servidor de notificaciones:** https://cafeteria-turnos-server.onrender.com
 
 ## Funcionalidades implementadas
 
-- Menú digital organizado por categorías (Orden del día, Tortas, Tacos, Bebidas)
-- Carrito con límite de 5 productos distintos y máximo 2 unidades por producto
+- Menú digital organizado por categorías (Bebidas, Tortas, Tacos, Guisos, etc.)
+- Carrito con límite de 5 items en total y máximo 2 unidades por producto
 - Generación de número de orden único y correlativo por pedido
 - Panel de administración protegido con autenticación por correo y contraseña
 - Visualización simultánea de todos los pedidos activos en el panel admin
 - Cambio de estado de pedido: de "en preparación" a "listo" o "cancelado"
 - Notificación en pantalla en tiempo real cuando el pedido cambia de estado
 - Notificaciones push en dispositivos móviles al marcar pedido como listo o cancelado
+- Modo oscuro persistente (guardado en localStorage)
+- FAQ de ayuda al usuario con preguntas frecuentes en modal
+- Ludificación: saludo contextual según hora del día y animación de confeti al recibir pedido listo
 - Diseño responsivo adaptado a móvil, tablet y escritorio
 - Configuración PWA: instalable desde navegador móvil
+
+## Accesibilidad
+
+La aplicación implementa criterios WCAG 2.1, incluyendo contraste mínimo 4.5:1, tamaño táctil mínimo 44x44px, compatibilidad con lectores de pantalla nativos (VoiceOver/TalkBack), navegación por teclado y soporte de zoom hasta 400%.
+
+- `aria-label` en todos los botones interactivos
+- `aria-live="polite"` en el estado del pedido
+- `role="alert"` en notificaciones de listo y cancelado
+- `role="region"` en cards de productos
+- Outline visible en navegación por Tab (`focus-visible`)
 
 ## Cómo instalar la PWA en tu dispositivo
 
 **Android (Chrome):**
 1. Abre https://cafeteria-turnos.vercel.app en Chrome
-2. Toca el menú (tres puntos) -> "Agregar a pantalla de inicio"
+2. Toca el menú (tres puntos) → "Agregar a pantalla de inicio"
 
 **iOS (Safari):**
 1. Abre https://cafeteria-turnos.vercel.app en Safari
-2. Toca el botón de compartir -> "Agregar a pantalla de inicio"
+2. Toca el botón de compartir → "Agregar a pantalla de inicio"
 
 ## Uso de inteligencia artificial
 
@@ -96,8 +111,7 @@ Se utilizó **Claude (Anthropic)** como herramienta de apoyo durante el desarrol
   - Configuración del servidor Node.js con Firebase Admin SDK
   - Resolución de errores durante el desarrollo y despliegue
   - Configuración de PWA con vite-plugin-pwa
-- **Partes del proyecto apoyadas por IA:** Configuración inicial, integración con Firebase, servidor de notificaciones
-- **Revisión del equipo:** Todo el código generado fue revisado, probado, ajustado e integrado por el equipo. Los integrantes comprenden el funcionamiento de cada componente del sistema.
+- **Revisión del equipo:** Todo el código generado fue revisado, probado, ajustado e integrado por el equipo.
 - **Enlace a la conversación:** https://claude.ai/share/9cffc771-bd0d-46ea-ba1c-0c1bbccebf41
 
 ## Licencia
