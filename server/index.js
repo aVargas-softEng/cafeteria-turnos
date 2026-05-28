@@ -23,7 +23,12 @@ db.collection('turnos').onSnapshot((snapshot) => {
       if (estado !== 'listo' && estado !== 'cancelado') return
 
       const mensaje = estado === 'listo'
-        ? { title: '¡Tu orden está lista!', body: 'Pasa a ventanilla a recoger y pagar tu pedido.' }
+        ? { 
+            title: '¡Tu orden está lista!', 
+            body: data.horarioRecoleccion 
+              ? `Tu pedido programado para las ${data.horarioRecoleccion} hrs ya está listo. ¡Pasa por él!` 
+              : 'Pasa a ventanilla a recoger y pagar tu pedido.' 
+          }
         : { title: 'Orden cancelada', body: 'El personal canceló tu pedido.' }
 
       try {
